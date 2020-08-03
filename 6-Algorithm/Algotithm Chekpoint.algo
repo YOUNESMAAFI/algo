@@ -1,0 +1,44 @@
+ALGORITHM sentence_reading_algo
+VAR
+    //Input
+    sentence : STRING ;
+    //counter of charecters
+    counter1 : INTEGER := 0;
+    //counter of words
+    counter2 : INTEGER := 0;
+    //counter of vowels
+    counter3 : INTEGER := 0;
+BEGIN
+    Read(sentence);
+        //counting Characters
+        FOR i FROM 0 TO sentence(last_char) STEP 1 DO
+            Read(char_of_sentece_at_position_i)
+            IF (char_of_sentece_at_position_i = ".") THEN
+                BREAK;
+            ELSE_IF (char_of_sentece_at_position_i <> " ") THEN
+                counter1:= counter1 + 1 ;
+            END_IF
+        END_FOR
+        Write(counter1);
+
+        //counting words
+        FOR i FROM 0 TO sentence(last_char_of) STEP 1 DO
+            Read(char_of_sentece_at_position_i)
+            IF (char_of_sentece_at_position_i = ".") THEN
+                BREAK;
+            ELSE_IF (char_of_sentece_at_position_i = " ") THEN
+                counter2:= counter2 + 1 ;
+            END_IF
+        END_FOR
+        Write(counter2);
+
+        //counting vowels
+        FOR i FROM 0 TO sentence(last_char_of) STEP 1 DO
+            Read(char_of_sentece_at_position_i)
+            IF (char_of_sentece_at_position_i = "a" OR "e" OR "i" OR "o" OR "u" OR "y") THEN
+                counter3:= counter3 + 1 ;
+            END_IF
+        END_FOR
+        Write(counter3);
+        
+END
