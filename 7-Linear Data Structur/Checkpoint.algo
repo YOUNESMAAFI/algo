@@ -1,0 +1,184 @@
+//Problem 1
+// First Method
+ALGORITHM sum_distinct
+VAR
+    x : INTEGER; 
+    y : INTEGER;
+// only used to declare the arrays
+    sum : INTEGER := 0;
+    set1 : ARRAY_OF INTEGER[x];
+    set2 : ARRAY_OF INTEGER[y];
+    i,j : INTEGER;
+
+BEGIN
+    Read(set1);
+    // comparing every element from set2 to one element from set1 if no match found that element is added to sum
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        j := 0;
+        Read(set2)
+        WHILE (j < set2.length) DO
+            IF (set2[j] =set1[i]) THEN
+                BREAK;
+            END_IF
+            j := j+1;
+        END_WHILE
+        IF (j=set1.length) THEN
+            sum := sum + set1[i];
+        END_IF
+    END_FOR
+    // comparing every element from set1 to one element from set2 if no match found that element is added to sum
+    Read(set2);
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        j := 0;
+        Read(set1)
+        WHILE (j < set1.length) DO
+            IF (set1[j] = set2[i]) THEN
+                BREAK;
+            END_IF
+            j := j+1;
+        END_WHILE
+        IF (j=set2.length) THEN
+            sum := sum + set2[i];
+        END_IF
+    END_FOR
+    //Result
+    Write(sum);
+END
+
+
+//Problem 1
+// Second Method
+ALGORITHM sum_distinct
+VAR
+    x : INTEGER; 
+    y : INTEGER;
+// only used to declare the arrays
+    sum : INTEGER := 0;
+    set1 : ARRAY_OF INTEGER[x];
+    set2 : ARRAY_OF INTEGER[y];
+    i,j,count : INTEGER;
+    htab : HASH_TABLE<INTEGER,INTEGER>;
+
+BEGIN
+    Read(set1);
+
+// inserting elements from set 1 to htab with a counter
+
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+            IF (htab.lookup(set1[i]) = TRUE) THEN
+                count := htab.get(set1[i]);
+                htab.insert(set1[i],count+1);
+            ELSE
+                htab.insert(set[i],1);
+            END_IF
+    END_FOR
+
+    Read(set2);
+
+// inserting elements from set 2 to htab with a counter
+
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+            IF (htab.lookup(set2[i]) = TRUE) THEN
+                count := htab.get(set2[i]);
+                htab.insert(set2[i],count+1);
+            ELSE
+                htab.insert(set2[i],1);
+            END_IF
+    END_FOR
+
+// summing distect elements wish have count of 1 from set1
+
+    FOR j FROM 0 TO htab.length-1 STEP 1  DO
+            IF (htab.get(set1[j]) = 1) THEN
+                sum := sum + set1[j];
+            END_IF
+    END_FOR
+
+// summing distect elements wish have count of 1 from set2
+
+    FOR j FROM 0 TO htab.length-1 STEP 1  DO
+            IF (htab.get(set2[j]) = 1) THEN
+                sum := sum + set2[j];
+            END_IF
+    END_FOR
+    //Result
+    Write(sum);
+END
+
+// Problem 2
+// First Method
+
+ALGORITHM sum_overlapping
+VAR
+    x : INTEGER; 
+    y : INTEGER;
+// only used to declare the arrays
+    sum : INTEGER := 0;
+    set1 : ARRAY_OF INTEGER[x];
+    set2 : ARRAY_OF INTEGER[y];
+    i,j : INTEGER;
+
+BEGIN
+    Read(set1);
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+    Read(set2);
+    // comparing every element from set 2 to set1[i] then adding to summ if it finds overlapping
+        FOR j FROM 0 TO set2.length-1 STEP 1  DO
+            IF (set1[i] = set2[j]) THEN
+                sum := sum + set2[j]
+            END_IF
+        END_FOR
+    END_FOR
+    Write(sum)
+END
+
+//Problem 2
+// Second Method
+ALGORITHM sum_distinct
+VAR
+    x : INTEGER; 
+    y : INTEGER;
+// only used to declare the arrays
+    sum : INTEGER := 0;
+    set1 : ARRAY_OF INTEGER[x];
+    set2 : ARRAY_OF INTEGER[y];
+    i,j,count : INTEGER;
+    htab : HASH_TABLE<INTEGER,INTEGER>;
+
+BEGIN
+    Read(set1);
+
+// inserting elements from set 1 to htab with a counter
+
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+            IF (htab.lookup(set1[i]) = TRUE) THEN
+                count := htab.get(set1[i]);
+                htab.insert(set1[i],count+1);
+            ELSE
+                htab.insert(set[i],1);
+            END_IF
+    END_FOR
+
+    Read(set2);
+
+// inserting elements from set 2 to htab with a counter
+
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+            IF (htab.lookup(set2[i]) = TRUE) THEN
+                count := htab.get(set2[i]);
+                htab.insert(set2[i],count+1);
+            ELSE
+                htab.insert(set2[i],1);
+            END_IF
+    END_FOR
+
+// summing overlapping elements wish have count of 2 from set1/set2
+
+    FOR j FROM 0 TO htab.length-1 STEP 1  DO
+            IF (htab.get(set1[j]) = 2) THEN
+                sum := sum + set1[j];
+            END_IF
+    END_FOR
+
+    Write(sum);
+END
