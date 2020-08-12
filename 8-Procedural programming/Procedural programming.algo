@@ -16,12 +16,13 @@ END
 
 ALGORITHM ortho_verification
 VAR
-    matrix_of_vectors : ARRAY_OF ARRAYS[n][2];
+    vector1,vector2 : ARRAY_OF FLOAT[n]
     i,j,k : INTEGER;
 BEGIN
-    Read(matrix_of_vectors);
+    Read(vector1);
+    Read(vector2);
     FOR i FROM 0 TO n-1 STEP 1 DO
-        k:= dot_product(matrix_of_vectors[i][1],matrix_of_vectors[i][2]);
+        k:= dot_product(vector1,vector2);
         IF (k = 0) THEN
             RETURN TRUE
         ELSE
