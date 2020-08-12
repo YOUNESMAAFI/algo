@@ -1,0 +1,31 @@
+//Write a procedure, called dot_product which calculates in the variable ps, the dot(scalar) product of v1 and v2 (v1 and v2 are vectors of IR)
+
+
+PROCEDURE dot_product(v1,v2 : ARRAY_OF FLOAT[n];)
+VAR
+    ps, i : INTEGER;
+
+BEGIN
+    IF (v1.length = v2.length) THEN
+        FOR i FROM 0 TO v1.length STEP 1  DO
+            ps:= ps + v1[i]*v2[i]
+        END_FOR
+    END_IF
+END
+
+
+ALGORITHM ortho_verification
+VAR
+    matrix_of_vectors : ARRAY_OF ARRAYS[n][2];
+    i,j,k : INTEGER;
+BEGIN
+    Read(matrix_of_vectors);
+    FOR i FROM 0 TO n-1 STEP 1 DO
+        k:= dot_product(matrix_of_vectors[i][1],matrix_of_vectors[i][2]);
+        IF (k = 0) THEN
+            RETURN TRUE
+        ELSE
+            RETURN FALSE
+        END_IF
+    END_FOR
+END
