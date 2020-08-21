@@ -1,0 +1,84 @@
+BST :STRUCT
+                VAL : INTEGER;
+                LC : ^BST; // a pointer to left child
+                RC : ^BST; // a pointer to right child
+            END_STRUCT
+
+// Write a function that gives the number of nodes in the tree.
+
+FUNCTION bst_counter(BST) : INTEGER
+VAR
+    count : INTEGER := 0;
+BEGIN
+    IF (root <> NULL) THEN
+        count++ ;
+        bst_counter(root^.LC);
+        bst_counter(root^.RC);
+    END_IF
+    RETURN count ;
+END
+
+// Write a function that gives the height of a tree.
+
+FUNCTION bst_height(BST) : INTEGER
+VAR
+    count : INTEGER := 0;
+BEGIN
+    IF (root = NULL) THEN
+        retrun 0
+    ELSE
+    bst_height(root^.LC);
+    bst_height(root^.RC);
+        IF (bst_height(root^.LC) < bst_height(root^.RC)) THEN
+            count := bst_height(root^.RC) + 1
+        ELSE
+            count := bst_height(root^.LC) + 1 
+        END_IF
+    END_IF
+    RETURN count;
+END
+
+
+// Write a function that gives the number of leaves in the tree.
+
+FUNCTION leaf_counter(BST) : INTEGER
+VAR
+    count : INTEGER := 0;
+BEGIN
+    IF (root^.LC <> NULL OR root^.RC <> NULL) THEN
+        bst_counter(root^.LC);
+        bst_counter(root^.RC);
+    ELSE
+        count++;
+    END_IF
+    RETURN count ;
+END
+
+
+// Write a function that gives the maximum value in the tree.
+
+FUNCTION max_bst(root :^BST) : INTEGER
+BEGIN
+    IF (root <> NULL) THEN
+        IF (root^.RC = NULL) THEN
+            RETURN root^.VAL;
+        ELSE
+            RETURN max_bst(root^.RC);
+        END_IF
+    END_IF
+END
+
+
+// Write a function to test if the tree is a full binary tree.
+
+FUNCTION is_full(BST) : BOOLEAN
+BEGIN
+    IF (root = NULL) THEN
+        RETURN TRUE
+    ELSE IF (root^.RC = NULL AND root^.LC = NULL)
+        RETURN TRUE
+    ELSE IF (is_full(root^.RC) <> NULL AND is_full(root^.LC)<> NULL)
+        RETURN (is_full(root^.RC)  AND is_full(root^.LC))
+    END_IF
+    RETURN FALSE ;
+END
